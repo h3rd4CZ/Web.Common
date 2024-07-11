@@ -1,5 +1,4 @@
-﻿using RhDev.Common.Web.Core.DataAccess.Sql.Repository;
-using RhDev.Common.Web.Core.Caching;
+﻿using RhDev.Common.Web.Core.Caching;
 using RhDev.Common.Web.Core.DataAccess.Caching;
 using RhDev.Common.Web.Core.DataAccess.SQL;
 

@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RhDev.Common.Web.Core.Caching;
 using RhDev.Common.Web.Core.DataAccess.Caching;
-using RhDev.Common.Web.Core.DataAccess.SQL;
 using System.Linq.Expressions;
 
-namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
+namespace RhDev.Common.Web.Core.DataAccess.SQL
 {
     public abstract class DatabaseRepositoryBase<TStoreEntity, TDatabase> : RepositoryCacheServiceBase<TStoreEntity>
         where TStoreEntity : StoreEntity, IDataStoreEntity
@@ -59,7 +58,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
         protected async Task<TReturn> UseDatabaseAndReturnAsync<TReturn>(
             Func<TDatabase, DbSet<TStoreEntity>, Task<TReturn>> a,
             TDatabase database,
-            bool? save = null, 
+            bool? save = null,
             Func<Task> onAfterUpdate = default)
         {
             if (database == null) throw new ArgumentNullException(nameof(database));
@@ -80,7 +79,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             TDatabase database = null,
             Func<Task> onAfterUpdate = default)
         {
-            TReturn ret = default(TReturn);
+            TReturn ret = default;
 
             if (!Equals(null, database))
                 ret = await UseDatabaseAndReturnAsync(a, database, save, onAfterUpdate);
@@ -129,7 +128,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
                 .Reference(navigationResolver)
                 .LoadAsync();
         }
-                
+
         protected IQueryable<TStoreEntity> BuildQueryable(DbSet<TStoreEntity> set, IList<Expression<Func<TStoreEntity, object>>> include)
         {
             IQueryable<TStoreEntity> q = !Equals(null, include) && include.Any() ? set.Include(include.First()) : default(IQueryable<TStoreEntity>);
@@ -143,7 +142,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             {
                 q = set;
             }
-                        
+
             return q;
         }
 

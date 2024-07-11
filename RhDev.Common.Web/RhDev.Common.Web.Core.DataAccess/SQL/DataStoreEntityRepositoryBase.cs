@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RhDev.Common.Web.Core.Caching;
 using RhDev.Common.Web.Core.DataAccess.Caching;
-using RhDev.Common.Web.Core.DataAccess.SQL;
 using RhDev.Common.Web.Core.Extensions;
 using RhDev.Common.Web.Core.Utils;
 using System.Linq.Expressions;
 
-namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
+namespace RhDev.Common.Web.Core.DataAccess.SQL
 {
     public abstract class DataStoreEntityRepositoryBase<TStoreEntity, TDatabase> : DatabaseRepositoryBase<TStoreEntity, TDatabase>, IStoreRepository<TStoreEntity>
         where TStoreEntity : StoreEntity, IDataStoreEntity
@@ -73,10 +72,10 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             IList<Expression<Func<TStoreEntity, object>>>? include = null,
             bool asNoTracking = false,
             bool? checkSingle = null,
-            bool? ignoreQueryFilters = false, 
+            bool? ignoreQueryFilters = false,
             bool? refuseTotal = false)
             => await ReadAsync(
-                    lambda, 
+                    lambda,
                     c => c,
                     paging,
                     orderBy,
@@ -99,7 +98,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             bool? ignoreQueryFilters = false,
             bool? refuseTotal = false)
         {
-            return await UsePaginatedProjectedCacheServiceIfRequired(BuildReadDataKey(nameof(ReadAsync), lambda, default, orderBy, orderByDescending, include, asNoTracking, checkSingle, refuseTotal), 
+            return await UsePaginatedProjectedCacheServiceIfRequired(BuildReadDataKey(nameof(ReadAsync), lambda, default, orderBy, orderByDescending, include, asNoTracking, checkSingle, refuseTotal),
                 async () =>
             {
                 return await UseStoreRepositoryAndReturnAsync(async (db, set) =>
@@ -258,9 +257,9 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             {
                 db.Entry(entity).State = EntityState.Modified;
 
-                if(referencialEntitiesToUpdate is not null and { Length :> 0})
+                if (referencialEntitiesToUpdate is not null and { Length: > 0 })
                 {
-                    foreach (var reference in referencialEntitiesToUpdate.Where(r => r(entity) is not null)) 
+                    foreach (var reference in referencialEntitiesToUpdate.Where(r => r(entity) is not null))
                         db.Entry(reference(entity)).State = EntityState.Modified;
                 }
 
@@ -340,7 +339,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
             Expression<Func<TStoreEntity, object>>? orderBy = null,
             Expression<Func<TStoreEntity, object>>? orderByDescending = null,
             (int skip, int take)? paging = default,
-            int? take = default, 
+            int? take = default,
             IList<Expression<Func<TStoreEntity, object>>>? include = null,
             bool asNoTracking = false,
             bool? checkSingle = null,
@@ -374,7 +373,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository
                 .Take(paging.Value.take);
             }
 
-            if(take.HasValue)
+            if (take.HasValue)
             {
                 entitiesQuery = entitiesQuery
                 .Take(take.Value);

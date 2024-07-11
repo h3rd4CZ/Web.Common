@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RhDev.Common.Web.Core.DataAccess.SQL;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Configuration;
-using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores;
+using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores.Configuration;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores.Utils;
 using RhDev.Common.Web.Core.Extensions;
 using RhDev.Common.Web.Core.Impl.Test;

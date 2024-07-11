@@ -3,7 +3,7 @@ using RhDev.Common.Web.Core.Caching;
 using RhDev.Common.Web.Core.DataAccess.Caching;
 using RhDev.Common.Web.Core.DataAccess.SQL;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Configuration;
-using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores;
+using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores.Configuration;
 using RhDev.Common.Web.Core.Utils;
 
 namespace RhDev.Common.Web.Core.DataAccess.Sql.Repository.Stores.Configuration

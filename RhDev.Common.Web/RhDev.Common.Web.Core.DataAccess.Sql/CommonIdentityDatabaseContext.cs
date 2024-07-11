@@ -5,6 +5,7 @@ using RhDev.Common.Web.Core.DataAccess.Sql.Extensions;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Common;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Configuration;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Utils;
+using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow;
 
 namespace RhDev.Common.Web.Core.DataAccess.Sql
 {
@@ -39,6 +40,16 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql
         public DbSet<Logger> Loggers { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
 
+        public DbSet<WorkflowDefinition> WorkflowDefinitions { get; set; }
+        public DbSet<WorkflowDocument> WorkflowDocuments { get; set; }
+        public DbSet<WorkflowInstance> WorkflowInstances { get; set; }
+        public DbSet<WorkflowInstanceHistory> WorkflowInstanceHistory { get; set; }
+        public DbSet<WorkflowInstanceSystemProcessingInfo> WorkflowInstanceSystemProcessingInfo { get; set; }
+        public DbSet<WorkflowProperty> WorkflowProperties { get; set; }
+        public DbSet<WorkflowTask> WorkflowTasks { get; set; }
+        public DbSet<WorkflowTransitionLog> WorkflowTransitionLogs { get; set; }
+        public DbSet<WorkflowTransitionRequest> WorkflowTransitionRequest { get; set; }
+
         public CommonDatabaseContext() { }
 
         public CommonDatabaseContext(DbContextOptions contextOptions) : base(contextOptions) { }
@@ -72,6 +83,16 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql
         public DbSet<ApplicationUserSettings> ApplicationUserSettings { get; set; }
         public DbSet<Logger> Loggers { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
+
+        public DbSet<WorkflowDefinition> WorkflowDefinitions { get; set; }
+        public DbSet<WorkflowDocument> WorkflowDocuments { get; set; }
+        public DbSet<WorkflowInstance> WorkflowInstances { get; set; }
+        public DbSet<WorkflowInstanceHistory> WorkflowInstanceHistory { get; set; }
+        public DbSet<WorkflowInstanceSystemProcessingInfo> WorkflowInstanceSystemProcessingInfo { get; set; }
+        public DbSet<WorkflowProperty> WorkflowProperties { get; set; }
+        public DbSet<WorkflowTask> WorkflowTasks{ get; set; }
+        public DbSet<WorkflowTransitionLog> WorkflowTransitionLogs { get; set; }
+        public DbSet<WorkflowTransitionRequest> WorkflowTransitionRequest { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
