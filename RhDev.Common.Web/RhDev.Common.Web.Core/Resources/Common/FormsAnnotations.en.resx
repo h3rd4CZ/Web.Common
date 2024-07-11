@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessToken" xml:space="preserve">
+    <value>Access token</value>
+  </data>
+  <data name="AssigningRoleTypeRequired" xml:space="preserve">
+    <value>Please chose user role type</value>
+  </data>
+  <data name="ByPassFailure" xml:space="preserve">
+    <value>Bypass when fail</value>
+  </data>
+  <data name="BypassOnFailure" xml:space="preserve">
+    <value>Bypass when fail</value>
+  </data>
+  <data name="ComparePasswordMatch" xml:space="preserve">
+    <value>Password does not match</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="CookieExpirationinMinutes" xml:space="preserve">
+    <value>Cookie expiration in minutes</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="DegreesAfterName" xml:space="preserve">
+    <value>Titles after name</value>
+  </data>
+  <data name="DegreesBeforeName" xml:space="preserve">
+    <value>Titles before name</value>
+  </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Domain</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Email is not in correct form</value>
+  </data>
+  <data name="EmailListInvalid" xml:space="preserve">
+    <value>Some email is not in correct format</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IsAdmin" xml:space="preserve">
+    <value>Adminsitrator</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Lastname</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NotificationSystem" xml:space="preserve">
+    <value>Notification type</value>
+  </data>
+  <data name="NotInRange" xml:space="preserve">
+    <value>The field is not in range {1} - {2}</value>
+  </data>
+  <data name="OnlyDigits" xml:space="preserve">
+    <value>Code must contains only numbers</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Password2" xml:space="preserve">
+    <value>Password 2</value>
+  </data>
+  <data name="PasswordChangedSucc" xml:space="preserve">
+    <value>Passsword has been changed</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password is required for internal accounts</value>
+  </data>
+  <data name="PasswordRequiredIfNotCustomer" xml:space="preserve">
+    <value>Password is required for non-customer accounts</value>
+  </data>
+  <data name="PasswordsDoesNotmatch" xml:space="preserve">
+    <value>Password and confirmation apssword does not match</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PhoneInvalid" xml:space="preserve">
+    <value>Please insert valid phone number</value>
+  </data>
+  <data name="PhoneNumberInternational" xml:space="preserve">
+    <value>Please enter a valid phone number in international format (00{{country code}}{{phone number}})</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Pwd2FaLength" xml:space="preserve">
+    <value>{0} must be {1} characters long.</value>
+  </data>
+  <data name="Queue" xml:space="preserve">
+    <value>Queue ID</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember?</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Field {0} is required</value>
+  </data>
+  <data name="RequiredNoField" xml:space="preserve">
+    <value>Field is required</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="SignoutInactivityIntervalInMinutes" xml:space="preserve">
+    <value>Signout interval in minutes</value>
+  </data>
+  <data name="SmsAddress" xml:space="preserve">
+    <value>SMS address</value>
+  </data>
+  <data name="SmsNotification" xml:space="preserve">
+    <value>SMS notification</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Timeout" xml:space="preserve">
+    <value>Timeout</value>
+  </data>
+  <data name="TwoFaCodeExpirationInSeconds" xml:space="preserve">
+    <value>2FA code expiration</value>
+  </data>
+  <data name="TwoFactorCode" xml:space="preserve">
+    <value>Authorization code</value>
+  </data>
+  <data name="UseDefaultCredentials" xml:space="preserve">
+    <value>Use default network credentials</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="UserNameAtLeast" xml:space="preserve">
+    <value>{0} must be a minimum of {2} and a maximum of {1} characters long.</value>
+  </data>
+  <data name="ValueEmpty" xml:space="preserve">
+    <value>Prázdná hodnota</value>
+  </data>
+</root>

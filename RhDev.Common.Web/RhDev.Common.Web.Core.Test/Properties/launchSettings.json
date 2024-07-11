@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RhDev.Common.Web.Core.Test": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "TEST_Common__QueueService__QueueCapacity": "2000"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Cronos" Version="0.7.1" />
+		<PackageReference Include="FluentAssertions" Version="6.12.0" />
+		<PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="12.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.13" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.1" />
+		<PackageReference Include="NLog.DiagnosticSource" Version="5.2.0" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.3.5" />
+		<PackageReference Include="NSubstitute" Version="5.1.0" />
+		<PackageReference Include="RazorEngineCore" Version="2022.8.1" />
+		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.1" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="6.3.0" />
+		<PackageReference Include="StructureMap" Version="4.7.1" />
+		<PackageReference Include="xunit.abstractions" Version="2.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj" />
+	  <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj" />
+	  <ProjectReference Include="..\RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj" />
+	</ItemGroup>
+	
+</Project>

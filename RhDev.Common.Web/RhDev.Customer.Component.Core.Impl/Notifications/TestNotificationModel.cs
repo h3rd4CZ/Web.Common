@@ -1,0 +1,1 @@
+﻿public record struct TestNotificationModel(int age, string firstName, string lastName, List<string> skills);

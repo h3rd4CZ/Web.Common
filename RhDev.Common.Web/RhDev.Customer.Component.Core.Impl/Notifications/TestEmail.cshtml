@@ -1,0 +1,23 @@
+﻿@inherits RazorEngineCore.RazorEngineTemplateBase<TestNotificationModel>
+
+<div>Test mail message</div>
+
+<h2>
+    @($"{Model.firstName} {Model.lastName}")
+</h2>
+
+@if(Model.firstName == Model.lastName)
+{
+    <strong>!First name same as lastname!</strong>
+}
+
+<h3>@Model.age</h3> years old
+
+<h4>Skills</h4>
+
+<ul>
+    @foreach (var skill in Model.skills)
+    {
+        <li>@skill</li>
+    }
+</ul>

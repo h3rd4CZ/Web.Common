@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessToken" xml:space="preserve">
+    <value>Přístupový token</value>
+  </data>
+  <data name="AssigningRoleTypeRequired" xml:space="preserve">
+    <value>Zvolte typ role uživatele</value>
+  </data>
+  <data name="ByPassFailure" xml:space="preserve">
+    <value>Průchod při chybě</value>
+  </data>
+  <data name="BypassOnFailure" xml:space="preserve">
+    <value>Průchod při chybě</value>
+  </data>
+  <data name="ComparePasswordMatch" xml:space="preserve">
+    <value>Hesla nesouhlasí</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Potvrďte nové heslo</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Potvrďte heslo</value>
+  </data>
+  <data name="CookieExpirationinMinutes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Aktuální heslo</value>
+  </data>
+  <data name="DegreesAfterName" xml:space="preserve">
+    <value>Tituly za jménem</value>
+  </data>
+  <data name="DegreesBeforeName" xml:space="preserve">
+    <value>Tituly před jménem</value>
+  </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Doména</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email adresa</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Email není ve správném tvaru</value>
+  </data>
+  <data name="EmailListInvalid" xml:space="preserve">
+    <value>Některý email není ve správném formátu</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="IsAdmin" xml:space="preserve">
+    <value>Administrátor</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Příjmení</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nové heslo</value>
+  </data>
+  <data name="NotificationSystem" xml:space="preserve">
+    <value>Typ oznámení</value>
+  </data>
+  <data name="NotInRange" xml:space="preserve">
+    <value>Pole není ve zvoleném rozsahu {1} - {2}</value>
+  </data>
+  <data name="OnlyDigits" xml:space="preserve">
+    <value>Kód musí obsahovat pouze číslice</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="Password2" xml:space="preserve">
+    <value>Heslo 2</value>
+  </data>
+  <data name="PasswordChangedSucc" xml:space="preserve">
+    <value>Heslo bylo změněno.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Heslo je povinné u interních účtů</value>
+  </data>
+  <data name="PasswordRequiredIfNotCustomer" xml:space="preserve">
+    <value>Heslo je vyžadováno u nezákaznických účtů</value>
+  </data>
+  <data name="PasswordsDoesNotmatch" xml:space="preserve">
+    <value>Heslo a potvrzovací heslo nesouhlasí</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefonní číslo</value>
+  </data>
+  <data name="PhoneInvalid" xml:space="preserve">
+    <value>Zadejte prosím platné telefonní číslo</value>
+  </data>
+  <data name="PhoneNumberInternational" xml:space="preserve">
+    <value>Zadejte platné telefonní číslo v mezinárodním formátu (00{{kód země}}{{telefonní číslo}})</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Pwd2FaLength" xml:space="preserve">
+    <value>{0} musí být  {1} znaků dlouhý.</value>
+  </data>
+  <data name="Queue" xml:space="preserve">
+    <value>ID fronty</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Zapamatovat?</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Pole {0} je vyžadováno</value>
+  </data>
+  <data name="RequiredNoField" xml:space="preserve">
+    <value>Pole je vyžadováno</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Odesílatel</value>
+  </data>
+  <data name="SignoutInactivityIntervalInMinutes" xml:space="preserve">
+    <value>Interval odhlášení při neaktivitě v minutách</value>
+  </data>
+  <data name="SmsAddress" xml:space="preserve">
+    <value>SMS adresa</value>
+  </data>
+  <data name="SmsNotification" xml:space="preserve">
+    <value>SMS notifikace</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Předmět</value>
+  </data>
+  <data name="Timeout" xml:space="preserve">
+    <value>Timeout</value>
+  </data>
+  <data name="TwoFaCodeExpirationInSeconds" xml:space="preserve">
+    <value>Expirace 2FA kódu</value>
+  </data>
+  <data name="TwoFactorCode" xml:space="preserve">
+    <value>Autorizační kód</value>
+  </data>
+  <data name="UseDefaultCredentials" xml:space="preserve">
+    <value>Použít defaultní přihlašovací údaje</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+  </data>
+  <data name="UserNameAtLeast" xml:space="preserve">
+    <value>{0} musí být minimálně  {2} a maximálně {1} znaků dlouhé.</value>
+  </data>
+  <data name="ValueEmpty" xml:space="preserve">
+    <value>Prázdná hodnota</value>
+  </data>
+</root>

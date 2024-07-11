@@ -1,0 +1,29 @@
+﻿@using RhDev.Customer.Component.App.Data.Notifications;
+@inherits RazorEngineCore.RazorEngineTemplateBase<WeatherNotificationModel>
+
+<div>Weather mail message</div>
+
+<h2>
+    @Model.cond
+</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tomas</td>
+            <td>36</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>@($"{Model.wind} m/s")</h3>
+
+<h2>
+    <span style=@($"color:{(Model.temp > 0 ? "blue" : "red")}")>@Model.temp °C</span>
+</h2>

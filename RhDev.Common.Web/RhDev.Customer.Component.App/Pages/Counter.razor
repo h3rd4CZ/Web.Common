@@ -1,0 +1,189 @@
+﻿@page "/counter"
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.Extensions.Options;
+@using RhDev.Common.Web.Core;
+@using RhDev.Common.Web.Core.Configuration;
+@using RhDev.Common.Web.Core.DataAccess
+@using RhDev.Common.Web.Core.DataAccess.SQL;
+@using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores.Utils;
+@using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores;
+@using RhDev.Common.Web.Core.Impl;
+@using RhDev.Common.Web.Core.Impl.Timer.Queue;
+@using RhDev.Common.Web.Core.Utils;
+@using RhDev.Customer.Component.App.Data;
+@using RhDev.Customer.Component.App.Data.Notifications;
+@using RhDev.Customer.Component.Core.Impl.Data;
+
+@inject ICentralClockProvider CentralClockProvider
+@inject IUserConfigurationProvider UserConfigurationProvider
+@inject ILogger<Counter> logger;
+@inject IDataStoreAcessRepositoryFactory DataStoreAcessRepositoryFactory
+@inject IOptionsSnapshot<CommonConfiguration> commonConfiguration
+@inject IOptionsSnapshot<ApplicationConfiguration> appConfiguration
+@inject ILiveConfigurationProvider LiveConfigurationProvider
+@inject IBackgroundTaskQueue BackgroundTaskQueue
+@inject CustomNotificationService NotificationService
+@inject ICorrelationService CorrelationService
+@inject ApplicationDbContext ApplicationDbContext
+@inject IServiceProvider ServiceProvider
+@inject ApplicationDbContext ApplicationDbContext
+@inject IHttpContextAccessor HttpContextAccessor
+@inject ICityDataStore CityDataStore
+@inject ICityDataStore CityDataStoreRepository
+
+<PageTitle>Counter</PageTitle>
+
+<button class="btn btn-primary" @onclick="LoadUserSettings">User settings</button>
+<button class="btn btn-primary" @onclick="ReadLocalConfiguration">Read local configuration</button>
+<button class="btn btn-primary" @onclick="ReadDatabase">Read Local Database</button>
+<button class="btn btn-primary" @onclick="EnqueueWork">Enqueue work</button>
+<button class="btn btn-primary" @onclick="Notify">Send mail</button>
+<button class="btn btn-primary" @onclick="Throw">Exception</button>
+<button class="btn btn-primary" @onclick="Log">Log</button>
+<button class="btn btn-primary" @onclick="ReadLogs">Read logs</button>
+
+
+
+<h3>
+    @CorrelationService.CurrentCorrelationId;
+</h3>
+
+@code {
+    static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+    private int currentCount = 0;
+
+    protected override Task OnInitializedAsync()
+    {
+        var now = CentralClockProvider.Now();
+
+        return base.OnInitializedAsync();
+    }
+
+    private async Task LoadUserSettings()
+    {
+        var conf = LiveConfigurationProvider.GetConfiguration<CommonConfiguration>();
+
+        await ApplicationConfigurationWalker.WalkConfiguration(conf, async (pi, section, key) =>
+        {
+            logger.LogInformation($"{pi.Name} : {key} : {pi.GetValue(section)}");
+        });
+
+        conf.SmsGate.AccessToken = DateTime.Now.Second.ToString();
+
+        await UserConfigurationProvider.WriteConfigurationPropertyAsync<CommonConfiguration>(conf, c => c.SmsGate.AccessToken, "SYSTEM");
+
+        var reloadedConf = LiveConfigurationProvider.GetConfiguration<CommonConfiguration>();
+    }
+
+    private async Task ReadDatabase()
+    {
+        var s1
+        = DataStoreAcessRepositoryFactory
+        .GetDomainQueryableStoreRepository<ICityDataStore>(Common.Web.Core.Caching.RepositoryCacheStrategy.ReadOnly);
+
+
+        var data = await s1
+          .ReadAsync(
+            c => true,
+            c => new { Id = c.Id, CreatedById = c.CreatedBy!.Id },
+            take: 100
+            );
+
+        var data1 = await s1
+          .ReadAsync(
+            c => true
+            );
+
+        var data2 = await s1
+          .ReadAsync(
+            c => true,
+            (0, 100)
+            );
+
+        var data3 = await s1
+          .ReadAsync(
+            c => true,
+            c => new { Id = c.Id, CreatedById = c.CreatedBy!.Id },
+            (0, 100)
+        );
+
+        var data3WithNoTotal = await s1
+          .ReadAsync(
+            c => true,
+            c => new { Id = c.Id, CreatedById = c.CreatedBy!.Id },
+            (0, 100), refuseTotal: true);
+
+        var localStore = DataStoreAcessRepositoryFactory.GetDomainQueryableStoreRepository<ICityDataStore>();
+
+        var first = await CityDataStoreRepository.ReadSingleAsync(c => c.Created < DateTime.Now);
+
+        // var first = ApplicationDbContext.Cities.FirstOrDefault();
+
+        if (first is not null)
+        {
+            await localStore.UpdateAsync(first.Id, city =>
+            {
+                city.Population = city.Population + 1;
+                city.Title = city.Title + "Changed";
+            });
+        }
+
+        // var commonStore = DataStoreAcessRepositoryFactory.GetDomainQueryableStoreRepository<IDayOffDataStore>();
+
+        // var allDayOffs = await commonStore.ReadAllAsync();
+
+        var user = await ApplicationDbContext.Users.FirstAsync();
+
+        if (user is not null)
+        {
+            user.UserName = $"changedate{DateTime.Now.Second}";
+
+            await ApplicationDbContext.SaveChangesAsync();
+        }
+    }
+
+    private void ReadLocalConfiguration()
+    {
+        var localConfiguration = appConfiguration.Value;
+    }
+
+    private async Task EnqueueWork()
+    {
+        await BackgroundTaskQueue.QueueBackgroundWorkItemAsync(new QueueWorkItem("1", async c =>
+        {
+            await Task.Run(() => logger.LogInformation($"Queued work item is working..."));
+        }));
+    }
+
+    private async Task Notify()
+    {
+        await NotificationService.SendWeatherInfo(new WeatherNotificationModel("Zataženo", -5, "4 SZ"), new ApplicationUser { UserName = "heriser", Email = "bob@contoso.com" });
+    }
+
+    private void Log()
+    {
+        logger.LogInformation("Log message from counter component {@UserName}", "SuperUser");
+    }
+
+    private void Exception()
+    {
+        throw new Exception("Error");
+    }
+
+    private async Task ReadLogs()
+    {
+        var store = DataStoreAcessRepositoryFactory.GetDomainQueryableStoreRepository<ILoggerDataStore>(Common.Web.Core.Caching.RepositoryCacheStrategy.ReadOnly);
+
+        var data = await store.ReadAsync(l => true, paging: (0, 30));
+
+        data = await store.ReadAsync(l => true, paging: (30, 30));
+
+        data = await store.ReadAsync(l => true, paging: (60, 30));
+
+        data = await store.ReadAsync(l => true, paging: (30, 30));
+
+        data = await store.ReadAsync(l => true, paging: (0, 30), refuseTotal : true);
+    }
+
+    private void Throw() => throw new Exception("Chyba");
+}
