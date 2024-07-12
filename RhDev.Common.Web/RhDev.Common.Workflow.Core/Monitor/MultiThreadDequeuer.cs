@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow;
 using RhDev.Common.Web.Core.Utils;
 using System;

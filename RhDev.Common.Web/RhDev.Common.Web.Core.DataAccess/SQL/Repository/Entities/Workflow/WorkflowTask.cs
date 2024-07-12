@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RhDev.Common.Web.Core.Workflow;
 using System;
 using System.ComponentModel.DataAnnotations;

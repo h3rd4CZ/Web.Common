@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using RhDev.Common.Web.Core.Composition;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow;
 

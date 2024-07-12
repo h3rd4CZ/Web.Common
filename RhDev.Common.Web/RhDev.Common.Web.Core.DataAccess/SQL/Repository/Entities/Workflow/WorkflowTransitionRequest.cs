@@ -12,13 +12,13 @@ namespace RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow
         User = 1,
         System = 1 << 1
     }
-    public class WorkflowTransitionRequest : StoreEntity
+    public class WorkflowTransitionRequest : StoreEntity, IDataStoreEntity
     {
         public int Id { get; set; }
-        public int? CompanyBranchId { get; set; }
         public WorkflowTransitionRequestPayload Payload { get; set; }
         public TransitionTaskStatus State { get; set; }
         public DateTime? Finished { get; set; }
+        public DateTime Created { get; set; }
         public string? ResultData { get; set; }
         public Guid TransitionId { get; set; }
         [MaxLength(512)]

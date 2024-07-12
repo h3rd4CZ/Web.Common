@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore;
 @using Microsoft.Extensions.Options;
 @using RhDev.Common.Web.Core;
@@ -32,6 +33,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @inject ICityDataStore CityDataStore
 @inject ICityDataStore CityDataStoreRepository
+@inject IDynamicDataStoreRepository<DbContext> dynamicDataStoreRepository
 
 <PageTitle>Counter</PageTitle>
 
@@ -63,6 +65,10 @@
 
     private async Task LoadUserSettings()
     {
+        var user = await dynamicDataStoreRepository.ReadEntityByLambdaAsync<IdentityUser>(typeof(IdentityUser), u => u.Id == "abc");
+
+        return;
+
         var conf = LiveConfigurationProvider.GetConfiguration<CommonConfiguration>();
 
         await ApplicationConfigurationWalker.WalkConfiguration(conf, async (pi, section, key) =>

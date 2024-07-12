@@ -1,4 +1,5 @@
 ﻿using RhDev.Common.Web.Core.Configuration.ConfigEntities;
+using RhDev.Common.Web.Core.Configuration.ConfigEntities.Workflow;
 using System.ComponentModel.DataAnnotations;
 
 namespace RhDev.Common.Web.Core.Configuration
@@ -31,6 +32,7 @@ namespace RhDev.Common.Web.Core.Configuration
         public QueueServiceConfiguration QueueService { get; set; } = new QueueServiceConfiguration();
         [ValidateComplexType]
         public PrivacySettingsConfigurtation PrivacySettings { get; set; } = new PrivacySettingsConfigurtation();
+        public WorkflowConfiguration Workflow { get; set; } = new();
         public static IApplicationConfigurationSection Get => new CommonConfiguration();
     }
 }

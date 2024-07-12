@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RhDev.Common.Web.Core.Workflow;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,6 @@ namespace RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow
 
         [MaxLength(1024)]
         public WorkflowDocumentIdentificator WorkflowDocumentIdentificator { get; set; }
-
-        public int UnitEntityId { get; set; }
 
         [MaxLength(128)]
         public string DocumentReference { get; set; }

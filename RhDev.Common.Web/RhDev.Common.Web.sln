@@ -3,27 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Web.Core", "RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj", "{7E902A8C-E356-4C08-A2EF-AF730E33BCF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Web.Core", "RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj", "{7E902A8C-E356-4C08-A2EF-AF730E33BCF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Web.Core.DataAccess", "RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj", "{6FE20435-8864-43FC-98AE-9B80832C4124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Web.Core.DataAccess", "RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj", "{6FE20435-8864-43FC-98AE-9B80832C4124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Web.Core.DataAccess.Sql", "RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj", "{C2E6568E-1E8B-44E4-8DBF-1A16FFCA87A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Web.Core.DataAccess.Sql", "RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj", "{C2E6568E-1E8B-44E4-8DBF-1A16FFCA87A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Web.Core.Impl", "RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj", "{B88916EC-D11E-4F15-89F7-68CF630D4ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Web.Core.Impl", "RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj", "{B88916EC-D11E-4F15-89F7-68CF630D4ACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Web.Core.Test", "RhDev.Common.Web.Core.Test\RhDev.Common.Web.Core.Test.csproj", "{50BF75B9-C089-40E8-95D7-DB2E938FFFB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Web.Core.Test", "RhDev.Common.Web.Core.Test\RhDev.Common.Web.Core.Test.csproj", "{50BF75B9-C089-40E8-95D7-DB2E938FFFB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Customer.Component.App", "RhDev.Customer.Component.App\RhDev.Customer.Component.App.csproj", "{2CAB8C06-9745-4B0E-B722-5C2077EB913C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Customer.Component.App", "RhDev.Customer.Component.App\RhDev.Customer.Component.App.csproj", "{2CAB8C06-9745-4B0E-B722-5C2077EB913C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FEEF726E-38AF-4E9E-9769-507F95042691}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{F8ED4605-1984-4CFC-B30A-31BBAC730348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Customer.Component.Core.Impl", "RhDev.Customer.Component.Core.Impl\RhDev.Customer.Component.Core.Impl.csproj", "{E865A9E8-9024-4B7E-9AF8-6C47C4C721EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Customer.Component.Core.Impl", "RhDev.Customer.Component.Core.Impl\RhDev.Customer.Component.Core.Impl.csproj", "{E865A9E8-9024-4B7E-9AF8-6C47C4C721EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{788C09C6-0486-4D6D-A5E1-1C758482D47E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Workflow.Core", "RhDev.Common.Workflow.Core\RhDev.Common.Workflow.Core.csproj", "{F5D3647D-352D-4846-B811-C2851887EED9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Workflow.Core", "RhDev.Common.Workflow.Core\RhDev.Common.Workflow.Core.csproj", "{F5D3647D-352D-4846-B811-C2851887EED9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Workflow.Core.DataAccess", "RhDev.Common.Workflow.Core.DataAccess\RhDev.Common.Workflow.Core.DataAccess.csproj", "{4312C70B-D646-454E-8F84-ABF6A25DDC89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Workflow.Core.DataAccess.Sql", "RhDev.Common.Workflow.Core.DataAccess.Sql\RhDev.Common.Workflow.Core.DataAccess.Sql.csproj", "{B2DF5526-59EF-4069-A7C5-88D87E2E3739}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhDev.Common.Workflow.Core.Impl", "RhDev.Common.Workflow.Core.Impl\RhDev.Common.Workflow.Core.Impl.csproj", "{AFB02864-DEA9-4497-9A22-AE78197D18AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhDev.Common.Workflow.Core.Test", "RhDev.Common.Workflow.Core.Test\RhDev.Common.Workflow.Core.Test.csproj", "{26D92E16-6A6A-4AD5-A767-D14AAC5432BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +71,22 @@ Global
 		{F5D3647D-352D-4846-B811-C2851887EED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5D3647D-352D-4846-B811-C2851887EED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5D3647D-352D-4846-B811-C2851887EED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4312C70B-D646-454E-8F84-ABF6A25DDC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4312C70B-D646-454E-8F84-ABF6A25DDC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4312C70B-D646-454E-8F84-ABF6A25DDC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4312C70B-D646-454E-8F84-ABF6A25DDC89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2DF5526-59EF-4069-A7C5-88D87E2E3739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2DF5526-59EF-4069-A7C5-88D87E2E3739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2DF5526-59EF-4069-A7C5-88D87E2E3739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2DF5526-59EF-4069-A7C5-88D87E2E3739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB02864-DEA9-4497-9A22-AE78197D18AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB02864-DEA9-4497-9A22-AE78197D18AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB02864-DEA9-4497-9A22-AE78197D18AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB02864-DEA9-4497-9A22-AE78197D18AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D92E16-6A6A-4AD5-A767-D14AAC5432BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D92E16-6A6A-4AD5-A767-D14AAC5432BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D92E16-6A6A-4AD5-A767-D14AAC5432BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D92E16-6A6A-4AD5-A767-D14AAC5432BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +100,10 @@ Global
 		{2CAB8C06-9745-4B0E-B722-5C2077EB913C} = {F8ED4605-1984-4CFC-B30A-31BBAC730348}
 		{E865A9E8-9024-4B7E-9AF8-6C47C4C721EA} = {F8ED4605-1984-4CFC-B30A-31BBAC730348}
 		{F5D3647D-352D-4846-B811-C2851887EED9} = {788C09C6-0486-4D6D-A5E1-1C758482D47E}
+		{4312C70B-D646-454E-8F84-ABF6A25DDC89} = {788C09C6-0486-4D6D-A5E1-1C758482D47E}
+		{B2DF5526-59EF-4069-A7C5-88D87E2E3739} = {788C09C6-0486-4D6D-A5E1-1C758482D47E}
+		{AFB02864-DEA9-4497-9A22-AE78197D18AA} = {788C09C6-0486-4D6D-A5E1-1C758482D47E}
+		{26D92E16-6A6A-4AD5-A767-D14AAC5432BE} = {788C09C6-0486-4D6D-A5E1-1C758482D47E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80ADA8D8-4946-450F-8A6E-A94BB7EC52DA}

@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Identity;
 using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow;
 using System;
 using System.Collections.Generic;

@@ -40,7 +40,6 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql
         public DbSet<Logger> Loggers { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
 
-        public DbSet<WorkflowDefinition> WorkflowDefinitions { get; set; }
         public DbSet<WorkflowDocument> WorkflowDocuments { get; set; }
         public DbSet<WorkflowInstance> WorkflowInstances { get; set; }
         public DbSet<WorkflowInstanceHistory> WorkflowInstanceHistory { get; set; }
@@ -84,7 +83,6 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql
         public DbSet<Logger> Loggers { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
 
-        public DbSet<WorkflowDefinition> WorkflowDefinitions { get; set; }
         public DbSet<WorkflowDocument> WorkflowDocuments { get; set; }
         public DbSet<WorkflowInstance> WorkflowInstances { get; set; }
         public DbSet<WorkflowInstanceHistory> WorkflowInstanceHistory { get; set; }

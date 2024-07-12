@@ -1,0 +1,294 @@
+﻿{
+  "Version": "1.0",
+  "VersionComment": "DMS Base Test ččšššččřžžýýááíí",
+  "StateDefinitions": [
+    {
+      "Title": "Přijatý",
+      "Code": "Received",
+      "IsStart": true
+    },
+    {
+      "Title": "Ke zpracování",
+      "Code": "ForProcessor"
+    },
+    {
+      "Title": "Zpracovaný",
+      "Code": "Processed",
+      "IsEnd": true
+    }
+  ],
+  "UserTransitions": [
+    {
+      "Code": "ForProcessor",
+      "ComletionMail": {
+        "Text": {
+          "Operand": {
+            "Type": "Computed",
+            "Operator": "Format",
+            "Operands": [
+              {
+                "Text": "Vaše <b>vyjádření<\/b> již není potřeba, úkol dokončil uživatel {0}."
+              },
+              {
+                "DataType": "User",
+                "Format": "DisplayName",
+                "Fetcher": "CurrentWorkflowUserId"
+              }
+            ]
+          }
+        },
+        "Subject": {
+          "Operand": { "Text": "Ukol Solitea - Workflow" }
+        }
+      },
+      "Transitions": [
+        {
+          "State": "Processed",
+          "StateManagementTrigger": {
+            "Name": "Zpracovat",
+            "Order": 1,
+            "Parameters": [
+              {
+                "Required": true,
+                "PropertyName": "Approver",
+                "DisplayName": "Uživatel",
+                "Type": "User"
+              }
+            ],
+            "History": {
+              "Entry": {
+                "Operand": {
+                  "Type": "Computed",
+                  "Operator": "Format",
+                  "Operands": [
+                    {
+                      "Text": "Zpracováno dne : {0}"
+                    },
+                    {
+                      "Fetcher": "CurrentDate"
+                    }
+                  ]
+                }
+              },
+              "Message": {
+                "Operand": { "Text": "Komentář zpracovatele" }
+              }
+            }
+          },
+          "AdditionalActions": [
+            {
+              "Id": "SendMail",
+              "SuppressException": true,
+              "Disabled": false,
+              "TypeName": "RhDev.Common.Workflow.Impl.Actions.Definition.StateManagementSendMailAction",
+              "Parameters": [
+                {
+                  "Name": "Recipient",
+                  "Operand": {
+                    "Type": "Client",
+                    "Text": "Approver"
+                  }
+                },
+                {
+                  "Name": "Text",
+                  "Operand": {
+                    "Type": "Computed",
+                    "Operator": "Format",
+                    "Operands": [
+                      {
+                        "Text": "<b>Hello from notification service<\/b> and : <span style=\"color:red\">Red colored text AND : {0}<\/span>"
+                      },
+                      {
+                        "Type": "Workflow",
+                        "Text": "SuperValue"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Subject",
+                  "Operand": { "Text": "Changed text in subject" }
+                }
+              ]
+            },
+            {
+              "Id": "UpdateMetadata",
+              "TypeName": "RhDev.Common.Workflow.Impl.Actions.Definition.StateManagementUpdateMetadataAction",
+              "Parameters": [
+                {
+                  "Name": "DocumentMiningHint",
+                  "Operand": { "Text": "Zpracováno" }
+                },
+                {
+                  "Name": "WorkflowAssignedTo",
+                  "Operand": { "DataType": "Null" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "SystemTransitions": [
+    {
+      "Code": "Received",
+      "Transitions": [
+        {
+          "State": "ForProcessor",
+          "Condition": {
+            "Or": [
+              {
+                "Operator": "Less",
+                "Operands": [
+                  {
+                    "Type": "Metadata",
+                    "Text": "Id"
+                  },
+                  { "Text": "1000" }
+                ]
+              },
+              {
+                "Operator": "Greater",
+                "Operands": [
+                  {
+                    "Type": "Metadata",
+                    "Text": "Id"
+                  },
+                  {
+                    "Text": "1000000"
+                  }
+                ]
+              }
+            ]
+          },
+          "Task": {
+            "GroupExtract": true,
+            "CopyRoleAssignment": false,
+            "TaskRespondeType": "FirstWin",
+            "Assignee": [
+              {
+                "DataType": "User",
+                "Text": "Permissions.Dms.BranchEditor|Branch-18"
+              }
+            ]
+          },
+          "StateManagementTrigger": {
+            "Parameters": [
+              {
+                "PropertyName": "Datum",
+                "Type": "DateTime",
+                "Required": true
+              }
+            ],
+            "History": {
+              "Entry": {
+                "Operand": {
+                  "Type": "Computed",
+                  "Operator": "Format",
+                  "Operands": [
+                    {
+                      "Text": "Zpracováno dne : {0}"
+                    },
+                    {
+                      "Fetcher": "CurrentDate"
+                    }
+                  ]
+                }
+              },
+              "Message": {
+                "Operand": {
+                  "Type": "Computed",
+                  "Operator": "Format",
+                  "Operands": [
+                    { "Text": "Komentář : {1}, {2}, {3}, {10}, {4}, {5} --- {5}, {6} ;;;; {1}" },
+                    {
+                      "Fetcher": "CurrentDate"
+                    },
+                    {
+                      "Type": "Metadata",
+                      "Text": "CreatedById",
+                      "Format": "email"
+                    },
+                    {
+                      "Type": "Metadata",
+                      "Text": "Id"
+                    },
+                    {
+                      "Type": "Metadata",
+                      "Text": "LastModified"
+                    },
+                    {
+                      "Type": "Client",
+                      "Text": "Datum"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "AdditionalActions": [
+            {
+              "Id": "UpdateMetadata1",
+              "TypeName": "RhDev.Common.Workflow.Impl.Actions.Definition.StateManagementUpdateMetadataAction",
+              "Parameters": [
+                {
+                  "Name": "MiningScore",
+                  "Operand": {
+                    "Type": "Computed",
+                    "Operator": "Add",
+                    "Operands": [
+                      { "Text": "10" },
+                      { "Text": "25" }
+                    ]
+                  }
+                },
+                {
+                  "Name": "LastModified",
+                  "Operand": {
+                    "Fetcher": "CurrentDate"
+                  }
+                },
+                {
+                  "Name": "WorkflowAssignedTo",
+                  "Operand": {
+                    "DataType": "User",
+                    "Text": "Permissions.Dms.BranchEditor|Branch-18"
+                  }
+                },
+                {
+                  "Name": "DocumentMiningHint",
+                  "Operand": {
+                    "Type": "Computed",
+                    "Operator": "Format",
+                    "Operands": [
+                      { "Text": "{0} ..." },
+                      {
+                        "Type": "Workflow",
+                        "Format": "Name",
+                        "Text": "SuperValue"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "MinedSuccessfully",
+                  "Operand": {
+                    "Type": "Computed",
+                    "Operator": "Neg",
+                    "Operands": [
+                      {
+                        "Type": "Metadata",
+                        "Text": "MinedSuccessfully"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

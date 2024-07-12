@@ -2,6 +2,7 @@
 using RhDev.Common.Web.Core.Composition.Factory;
 using RhDev.Common.Web.Core.Utils;
 using RhDev.Common.Web.Core.Workflow;
+using RhDev.Common.Workflow.Core.Security;
 using RhDev.Common.Workflow.Extensions;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,9 @@ namespace RhDev.Common.Workflow.PropertyModel.Properties
         public string DisplayName => displayName;
         public bool IsPermissionGroup =>isPermissionGroup;
         public SectionDesignation Section => section;
-                                        
+
+        IWorkflowGroupMembershipResolver workflowGroupMembershipResolver;
+
         public StateManagementUserValue(IPrincipalInfo value, SectionDesignation designation) : base(value)
         {
             Guard.NotNull(value, nameof(value));
@@ -143,7 +146,14 @@ namespace RhDev.Common.Workflow.PropertyModel.Properties
             lock (this)
             {
                 if (!_wasBuild)
-                {                                                            
+                {
+                    workflowGroupMembershipResolver = ApplicationContainerFactory.Root!.TryGetInstance<IWorkflowGroupMembershipResolver>();
+
+                    Guard.NotNull(
+                        workflowGroupMembershipResolver, 
+                        nameof(workflowGroupMembershipResolver), 
+                        $"There is no registered service for {nameof(IWorkflowGroupMembershipResolver)}. To work with groups, you must implement this service and register within DI");
+
                     _wasBuild = true;
                 }
             }

@@ -26,18 +26,6 @@ namespace RhDev.Customer.Component.Core.Impl.Data
                .WithMany(a => a.ModifiedCities)
                .HasForeignKey(c => c.LastModifiedById)
                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ApplicationUser>()
-               .HasOne(b => b.CreatedBy)
-               .WithMany(a => a.AuthoredUsers)
-               .HasForeignKey(c => c.CreatedById)
-               .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ApplicationUser>()
-               .HasOne(b => b.LastModifiedBy)
-               .WithMany(a => a.ModifiedUsers)
-               .HasForeignKey(c => c.LastModifiedById)
-               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

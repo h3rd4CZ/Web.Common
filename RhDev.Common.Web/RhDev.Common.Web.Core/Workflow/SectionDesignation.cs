@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace RhDev.Common.Web.Core.Workflow
         public string Location { get; set; }
         public SectionDesignation() { }
         public static SectionDesignation From(string location) => new SectionDesignation { Location = location };
+        public static SectionDesignation Empty => new SectionDesignation { Location = string.Empty };
 
         public override string ToString() => Location.ToString();
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow
 {

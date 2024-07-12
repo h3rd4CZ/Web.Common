@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core\RhDev.Common.Workflow.Core.csproj" />
+  </ItemGroup>
+
+</Project>
