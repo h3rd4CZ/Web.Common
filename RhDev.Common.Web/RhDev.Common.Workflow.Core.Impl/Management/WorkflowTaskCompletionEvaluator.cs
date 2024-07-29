@@ -198,7 +198,7 @@ namespace RhDev.Common.Workflow.Impl.Management
             var allOpenedTasks = await workflowTaskRepository.ReadAsync(t => t.WorkflowInstanceId == workflowDataId && t.GroupId == currentAssignedTasksGroupId && t.Status == WorkflowDatabaseTaskStatus.NotStarted);
             var alltasks = await workflowTaskRepository.ReadAsync(t => t.WorkflowInstanceId == workflowDataId && t.GroupId == currentAssignedTasksGroupId);
 
-            var completionMail = configuredState.ComletionMail;
+            var completionMail = configuredState.CompletionMail;
 
             foreach (var openedTask in allOpenedTasks)
             {

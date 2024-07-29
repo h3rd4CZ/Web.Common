@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RhDev.Common.Web.Core;
+using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Workflow;
 using RhDev.Common.Web.Core.DataAccess.Workflow;
 using RhDev.Common.Web.Core.Test;
 using RhDev.Common.Web.Core.Workflow;
+using RhDev.Common.Workflow.Core.Security;
 using RhDev.Common.Workflow.Core.Test.Data;
 using RhDev.Common.Workflow.DataAccess.SharePoint.Online;
 using RhDev.Common.Workflow.PropertyModel.Properties;
@@ -37,7 +39,7 @@ namespace RhDev.Common.Workflow.Core.Test
             var dataAccessor = services.GetRequiredService<IRawEntityDataAccessor>();
 
             var identifier = new WorkflowDocumentIdentifier(
-                SectionDesignation.Empty, new WorkflowDocumentIdentificator(2, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-777888", 1);
+                SectionDesignation.Empty, new WorkflowDocumentIdentificator(1, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-777888", 1);
 
             var created = DateTime.Now;
 
@@ -55,7 +57,7 @@ namespace RhDev.Common.Workflow.Core.Test
 
             var repo = services.GetRequiredService<ITestWorkflowMetadataRepository>();
 
-            var document = await repo.ReadByIdAsync(2);
+            var document = await repo.ReadByIdAsync(1);
 
             document.State.Should().Be("MinorState");
             document.Created.Should().Be(created);
@@ -75,7 +77,7 @@ namespace RhDev.Common.Workflow.Core.Test
 
             var identifier = new WorkflowDocumentIdentifier(
                 SectionDesignation.Empty,
-                new WorkflowDocumentIdentificator(1, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-777888", 1);
+                new WorkflowDocumentIdentificator(1, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-888", 1);
 
             var smIdValue = await dataAccessor.GetEntityFieldValueAsync(identifier, "Id");
                         
@@ -88,7 +90,7 @@ namespace RhDev.Common.Workflow.Core.Test
             smAssignedToValue.Should().BeOfType<StateManagementUserValue>();
             smCreatedByIdValue.Should().BeOfType<StateManagementUserValue>();
             smIdValue.Should().NotBeNull().And.BeOfType<StateManagementNumberValue>();
-            smCreatedValue.Should().NotBeNull().And.BeOfType<StateManagementNullValue>();
+            smCreatedValue.Should().NotBeNull().And.BeOfType<StateManagementDateTimeValue>();
             smDocNumberValue.Should().NotBeNull().And.BeOfType<StateManagementTextValue>();
         }
 
@@ -105,8 +107,13 @@ namespace RhDev.Common.Workflow.Core.Test
 
             serviceConfiguration: (ctx, services) =>
             {
+                services.AddScoped<IWorkflowGroupMembershipResolver, TestWorkflowGroupMembershipResolver>();
                 services.AddScoped<ITestWorkflowMetadataRepository, TestWorkflowMetadataRepository>();
-            }); ;
+
+                services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<WorkflowDatabaseTestContext>()
+                .AddDefaultTokenProviders();
+            });
 
             var services = host.Services;
 
@@ -151,17 +158,28 @@ namespace RhDev.Common.Workflow.Core.Test
                       Email = "bob@workflow.com"
                 }
             });
-                        
+
+            ctx.AddRange(new List<WorkflowDocument>
+            {
+                new WorkflowDocument
+                {
+                     Id = 1,
+                      DocumentReference = "2024-888"
+                }
+            });
+
             ctx.AddRange(new List<TestWorkflowMetadata>
                     {
                         new TestWorkflowMetadata
                         {
+                            WorkflowDocumentId = 1,
                             WorkflowAssignedTo = SystemUserNames.System.ToString(),
                             InvoiceNumber = "abcd",
                             Id = 1,
                             DocumentNumber = "2024-888",
                             State = "Initial",
                             MinedSuccessfully = false,
+                            CreatedById = BodUserId.ToString()
                             //Created= DateTime.Now
                         }
                     });

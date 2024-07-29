@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj" />
     <ProjectReference Include="..\RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core.DataAccess.Sql\RhDev.Common.Workflow.Core.DataAccess.Sql.csproj" />
     <ProjectReference Include="..\RhDev.Common.Workflow.Core.Impl\RhDev.Common.Workflow.Core.Impl.csproj" />
   </ItemGroup>
 

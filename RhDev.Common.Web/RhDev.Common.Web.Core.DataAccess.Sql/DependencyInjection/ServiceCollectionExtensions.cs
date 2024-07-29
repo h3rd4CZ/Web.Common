@@ -9,6 +9,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
+
         public static IServiceCollection ConfigureDatabase<TDbContext>(
             this IServiceCollection services,
             IConfiguration configuration,
@@ -28,10 +29,10 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.DependencyInjection
                     services.AddScoped(typeof(ISaveChangesInterceptor), interceptorType);
                 }
             }
-
+                        
             services.AddDbContext<TDbContext>((s, o) =>
             {
-                if(useLazyLoadingProxies) o.UseLazyLoadingProxies();
+                if (useLazyLoadingProxies) o.UseLazyLoadingProxies();
 
                 if (databaseSaveChangeInterceptorsTypes is not null and { Length: > 0 })
                 {

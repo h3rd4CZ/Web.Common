@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NLog;
 using RhDev.Common.Web.Core;
 using RhDev.Common.Web.Core.DataAccess.Workflow;
 using RhDev.Common.Web.Core.Test;
@@ -10,7 +13,10 @@ using RhDev.Common.Workflow.Core.DataAccess.Sql.Repository;
 using RhDev.Common.Workflow.Core.Security;
 using RhDev.Common.Workflow.Core.Test.Data;
 using RhDev.Common.Workflow.Impl.Utils;
+using RhDev.Common.Workflow.Management;
 using RhDev.Common.Workflow.Monitor;
+using System;
+using System.Data;
 using System.Reflection;
 using Xunit.Abstractions;
 
@@ -18,6 +24,13 @@ namespace RhDev.Common.Workflow.Core.Test
 {
     public class WfPassTest : IntegrationTestBase
     {
+        private const string EditorRoleId = "120CC36E-8346-4AAF-B3BA-AD6B44425AC7";
+        private const string ApproverRoleId = "E16E57D3-CB81-4EC4-9B1A-DB8B4E7C9D5D";
+        private const string AccountantRoleId = "061CEC25-DEDC-4F54-9DB5-0E69B971EB9D";
+
+        private const string EditorUserId = "951C2574-50A8-4D51-9960-2C9D175BDF5C";
+        private const string ApproverUserId = "F1E9F32F-6240-4C88-93D3-A6929439CD3D";
+        private const string AccountantUserId = "F1F67122-CAAA-4E15-B84C-A861E9972425";
 
         public WfPassTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper) { }
 
@@ -26,9 +39,6 @@ namespace RhDev.Common.Workflow.Core.Test
         {
             var services = TestProlog(true, nameof(WfPassTest));
 
-            var planner = services.GetRequiredService<IWorkflowRunnerPlanner>();
-
-            var dataAccessor = services.GetRequiredService<IRawEntityDataAccessor>();
             var wfService = services.GetRequiredService<IWorkflowService>();
             var fileData = File.ReadAllBytes("Assets\\machine.json");
             var fileDef = new WorkflowDefinitionFile { Data = fileData, Name = "machine.json", Version = "1.0" };
@@ -38,16 +48,21 @@ namespace RhDev.Common.Workflow.Core.Test
             var taskRepo = services.GetRequiredService<IWorkflowTaskRepository>();
             var requestsRepo = services.GetRequiredService<IWorkflowTransitionRequestRepository>();
             var metadataRepo = services.GetRequiredService<ITestWorkflowMetadataRepository>();
+            var groupMembershipResolver = services.GetRequiredService<IWorkflowGroupMembershipResolver>();
+            var serviceProvider = services.GetRequiredService<IServiceProvider>();
+
+            var um = services.GetRequiredService<UserManager<IdentityUser>>();
+
+            var roles = await um.GetUsersInRoleAsync("Editor");
 
             var identifier = new WorkflowDocumentIdentifier(
                 SectionDesignation.Empty,
-                    new WorkflowDocumentIdentificator(1, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-1", 1);
+                    new WorkflowDocumentIdentificator(1, typeof(TestWorkflowMetadata).AssemblyQualifiedName!), "2024-001", 1);
 
             var wf = await wfService.StartWorkflowAsync(identifier, fileDef, SystemUserNames.System.ToString(), new List<Workflow.Management.WorkflowStartProperty>
             {
-                 new Workflow.Management.WorkflowStartProperty{ Name = "SuperValue", Type = WorkflowDataType.Text, Value = "svv"}
+                 new Workflow.Management.WorkflowStartProperty{ Name = "SuperValue", Type = WorkflowDataType.Text, Value = "SuperValueAsStartParameter"}
             });
-
 
             //1st system transition
             var rp = new WorkflowRuntimeParametersBuilder()
@@ -60,7 +75,8 @@ namespace RhDev.Common.Workflow.Core.Test
 
             var transition = transitions.FirstOrDefault().TransitionInfos[0];
             var trigger = transition.Trigger;
-            rp.WithUserData(StateManagementCommonTriggerProperties.DataWithUserResponded(SystemUserNames.System.ToString(),
+            rp =
+                rp.WithUserData(StateManagementCommonTriggerProperties.DataWithUserResponded(SystemUserNames.System.ToString(),
                 new List<WorkflowTriggerParameter>()
                 {
                     new WorkflowTriggerParameter{ Name = "Datum", Value=DateTime.Now.ToString()}
@@ -76,17 +92,18 @@ namespace RhDev.Common.Workflow.Core.Test
             //2nd complete the task
             var rpTask = new WorkflowRuntimeParametersBuilder()
                 .WithDocumentIdentifier(identifier)
-                .WithUserId(SystemUserNames.System.ToString())
+                .WithUserId(EditorUserId)
+                .WithUserGroups((await groupMembershipResolver.GetAllGroupsAsync(EditorUserId)).ToList())
                 .WithWorkflowInfo(wf);
 
             var taskTransitions = await wfService.GetAllPermittedTransitionsAsync(rpTask.Build());
 
             var taskTransition = taskTransitions.FirstOrDefault().TransitionInfos[0];
             var taskTrigger = taskTransition.Trigger;
-            rpTask.WithUserData(StateManagementCommonTriggerProperties.DataWithUserResponded(SystemUserNames.System.ToString(),
+            rpTask.WithUserData(StateManagementCommonTriggerProperties.DataWithUserResponded(EditorUserId,
                 new List<WorkflowTriggerParameter>()
                 {
-                    new WorkflowTriggerParameter{ Name = "Approver", Value=SystemUserNames.System.ToString()}
+                    new WorkflowTriggerParameter{ Name = "Approver", Value=ApproverUserId }
                 }, taskTrigger.Code));
 
             await wfService.CompleteTaskAsync(rpTask.Build());
@@ -105,16 +122,19 @@ namespace RhDev.Common.Workflow.Core.Test
         {
             RegisterEfInMemoryMock(seed, databaseName);
 
+            RegisterMock(typeof(ISafeLock), p => new TestSafeLock(p.GetRequiredService<ILogger<TestSafeLock>>()));
+
             var host = Host<WorkflowDatabaseTestContext>(
             new[]
             {
                 RhDev.Common.Web.Core.Composition.CompositionDefinition.GetDefinition(),
                 Composition.CompositionDefinition.GetDefinition()
-            }, useDbContextFactory: false,
-
+            }, 
+            useDbContextFactory: false,
             serviceConfiguration: (ctx, services) =>
             {
                 services.AddScoped<IWorkflowGroupMembershipResolver, TestWorkflowGroupMembershipResolver>();
+                services.AddScoped<ITestWorkflowMetadataRepository, TestWorkflowMetadataRepository>();
 
                 services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<WorkflowDatabaseTestContext>()
@@ -127,31 +147,26 @@ namespace RhDev.Common.Workflow.Core.Test
 
         void RegisterEfInMemoryMock(bool seed, string? databaseName = default)
         {
-            if (seed)
+            RegisterEfInMemoryMock<WorkflowDatabaseTestContext, DbContext>(ctx =>
             {
-                RegisterEfInMemoryMock<WorkflowDatabaseTestContext, DbContext>(ctx =>
+                if (seed)
                 {
                     SeedDatabase(ctx);
-
                     ctx.SaveChanges();
+                }
 
-                }, databaseName);
-            }
-            else
-            {
-                RegisterEfInMemoryMock<WorkflowDatabaseTestContext, DbContext>(ctx =>
-                {
-                }, databaseName);
-            }
+            }, databaseName);
         }
 
         void SeedDatabase(WorkflowDatabaseTestContext ctx)
         {
             ctx.AddRange(new List<IdentityRole>
                     {
-                        new IdentityRole{  Id = "120CC36E-8346-4AAF-B3BA-AD6B44425AC7", Name = "Dms" }
+                        new IdentityRole{  Id = EditorRoleId, Name = "Editor", NormalizedName="Editor" },
+                        new IdentityRole{  Id = ApproverRoleId, Name = "Approver", NormalizedName="Approver" },
+                        new IdentityRole{  Id = AccountantRoleId, Name = "Accountant", NormalizedName="Accountant" }
                     });
-                        
+
 
             ctx.AddRange(new List<IdentityUser>
             {
@@ -160,6 +175,24 @@ namespace RhDev.Common.Workflow.Core.Test
                      Id = SystemUserNames.System.ToString(),
                       UserName = "System",
                       Email = "system@system.com"
+                },
+                new IdentityUser
+                {
+                     Id = EditorUserId,
+                      UserName = "EditorUser",
+                      Email = "editor@contoso.com"
+                },
+                new IdentityUser
+                {
+                     Id = ApproverUserId,
+                      UserName = "ApproverUser",
+                      Email = "approver@contoso.com"
+                },
+                new IdentityUser
+                {
+                     Id = AccountantUserId,
+                      UserName = "AccountantUser",
+                      Email = "accountant@contoso.com"
                 }
             });
 
@@ -167,8 +200,18 @@ namespace RhDev.Common.Workflow.Core.Test
             {
                 new IdentityUserRole<string>
                 {
-                     RoleId = "120CC36E-8346-4AAF-B3BA-AD6B44425AC7",
-                     UserId = SystemUserNames.System.ToString()
+                     RoleId = EditorRoleId,
+                     UserId = EditorUserId
+                },
+                new IdentityUserRole<string>
+                {
+                     RoleId = ApproverRoleId,
+                     UserId = ApproverUserId
+                },
+                new IdentityUserRole<string>
+                {
+                     RoleId = AccountantRoleId,
+                     UserId = AccountantUserId
                 }
             });
 
@@ -176,13 +219,12 @@ namespace RhDev.Common.Workflow.Core.Test
                     {
                         new TestWorkflowMetadata
                         {
-                            WorkflowAssignedTo = SystemUserNames.System.ToString(),
-                            InvoiceNumber = "abcd",
+                            CreatedById = SystemUserNames.System.ToString(),
+                            InvoiceNumber = "123564987",
                             Id = 1,
-                            DocumentNumber = "2024-888",
+                            DocumentNumber = "2024-001",
                             State = "Initial",
-                            MinedSuccessfully = false,
-                            //Created= DateTime.Now
+                            MinedSuccessfully = false
                         }
                     });
         }

@@ -18,7 +18,7 @@ namespace RhDev.Common.Web.Core.DataAccess.Sql.Factory
                 var registeredContext = serviceProvider.GetService<DbContext>();
 
                 if (registeredContext is null) throw new InvalidOperationException("DBContext using factory must be registered against real db context, no real dbcontext found");
-
+                                
                 return (TDBContext)ActivatorUtilities.CreateInstance(serviceProvider, registeredContext.GetType());
             }
             else

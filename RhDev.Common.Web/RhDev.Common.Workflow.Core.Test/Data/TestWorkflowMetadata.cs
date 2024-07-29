@@ -18,8 +18,11 @@ namespace RhDev.Common.Workflow.Core.Test.Data
         public string? DocumentNumber { get; internal set; }
         public string? State { get; internal set; }
         public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
         public IdentityUser CreatedBy { get; set; }
         public string CreatedById { get; set; }
         public bool MinedSuccessfully { get; internal set; }
+        public int MiningScore { get; internal set; }
+        public string? DocumentMiningHint { get; set; }
     }
 }

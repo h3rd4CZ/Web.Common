@@ -1,6 +1,6 @@
 ﻿{
   "Version": "1.0",
-  "VersionComment": "DMS Base Test ččšššččřžžýýááíí",
+  "VersionComment": "Document Base workflow test",
   "StateDefinitions": [
     {
       "Title": "Přijatý",
@@ -12,7 +12,7 @@
       "Code": "ForProcessor"
     },
     {
-      "Title": "Zpracovaný",
+      "Title": "Zaúčtovaný",
       "Code": "Processed",
       "IsEnd": true
     }
@@ -20,7 +20,7 @@
   "UserTransitions": [
     {
       "Code": "ForProcessor",
-      "ComletionMail": {
+      "CompletionMail": {
         "Text": {
           "Operand": {
             "Type": "Computed",
@@ -38,7 +38,7 @@
           }
         },
         "Subject": {
-          "Operand": { "Text": "Ukol Solitea - Workflow" }
+          "Operand": { "Text": "Ukol - Workflow" }
         }
       },
       "Transitions": [
@@ -55,62 +55,29 @@
                 "Type": "User"
               }
             ],
-            "History": {
-              "Entry": {
-                "Operand": {
-                  "Type": "Computed",
-                  "Operator": "Format",
-                  "Operands": [
-                    {
-                      "Text": "Zpracováno dne : {0}"
-                    },
-                    {
-                      "Fetcher": "CurrentDate"
-                    }
-                  ]
-                }
-              },
-              "Message": {
-                "Operand": { "Text": "Komentář zpracovatele" }
-              }
-            }
-          },
-          "AdditionalActions": [
-            {
-              "Id": "SendMail",
-              "SuppressException": true,
-              "Disabled": false,
-              "TypeName": "RhDev.Common.Workflow.Impl.Actions.Definition.StateManagementSendMailAction",
-              "Parameters": [
-                {
-                  "Name": "Recipient",
-                  "Operand": {
-                    "Type": "Client",
-                    "Text": "Approver"
-                  }
-                },
-                {
-                  "Name": "Text",
+            "History": [
+              {
+                "Entry": {
                   "Operand": {
                     "Type": "Computed",
                     "Operator": "Format",
                     "Operands": [
                       {
-                        "Text": "<b>Hello from notification service<\/b> and : <span style=\"color:red\">Red colored text AND : {0}<\/span>"
+                        "Text": "Zpracováno dne : {0}"
                       },
                       {
-                        "Type": "Workflow",
-                        "Text": "SuperValue"
+                        "Fetcher": "CurrentDate"
                       }
                     ]
                   }
                 },
-                {
-                  "Name": "Subject",
-                  "Operand": { "Text": "Changed text in subject" }
+                "Message": {
+                  "Operand": { "Text": "Komentář zpracovatele" }
                 }
-              ]
-            },
+              }
+            ]
+          },
+          "AdditionalActions": [
             {
               "Id": "UpdateMetadata",
               "TypeName": "RhDev.Common.Workflow.Impl.Actions.Definition.StateManagementUpdateMetadataAction",
@@ -156,7 +123,7 @@
                     "Text": "Id"
                   },
                   {
-                    "Text": "1000000"
+                    "Text": "0"
                   }
                 ]
               }
@@ -164,12 +131,11 @@
           },
           "Task": {
             "GroupExtract": true,
-            "CopyRoleAssignment": false,
             "TaskRespondeType": "FirstWin",
             "Assignee": [
               {
                 "DataType": "User",
-                "Text": "Permissions.Dms.BranchEditor|Branch-18"
+                "Text": "Editor"
               }
             ]
           },
@@ -181,49 +147,51 @@
                 "Required": true
               }
             ],
-            "History": {
-              "Entry": {
-                "Operand": {
-                  "Type": "Computed",
-                  "Operator": "Format",
-                  "Operands": [
-                    {
-                      "Text": "Zpracováno dne : {0}"
-                    },
-                    {
-                      "Fetcher": "CurrentDate"
-                    }
-                  ]
+            "History": [
+              {
+                "Entry": {
+                  "Operand": {
+                    "Type": "Computed",
+                    "Operator": "Format",
+                    "Operands": [
+                      {
+                        "Text": "Zpracováno dne : {0}"
+                      },
+                      {
+                        "Fetcher": "CurrentDate"
+                      }
+                    ]
+                  }
                 }
-              },
-              "Message": {
-                "Operand": {
-                  "Type": "Computed",
-                  "Operator": "Format",
-                  "Operands": [
-                    { "Text": "Komentář : {1}, {2}, {3}, {10}, {4}, {5} --- {5}, {6} ;;;; {1}" },
-                    {
-                      "Fetcher": "CurrentDate"
-                    },
-                    {
-                      "Type": "Metadata",
-                      "Text": "CreatedById",
-                      "Format": "email"
-                    },
-                    {
-                      "Type": "Metadata",
-                      "Text": "Id"
-                    },
-                    {
-                      "Type": "Metadata",
-                      "Text": "LastModified"
-                    },
-                    {
-                      "Type": "Client",
-                      "Text": "Datum"
-                    }
-                  ]
-                }
+              }
+            ],
+            "Message": {
+              "Operand": {
+                "Type": "Computed",
+                "Operator": "Format",
+                "Operands": [
+                  { "Text": "Komentář : {1}, {2}, {3}, {10}, {4}, {5} --- {5}, {6} ;;;; {1}" },
+                  {
+                    "Fetcher": "CurrentDate"
+                  },
+                  {
+                    "Type": "Metadata",
+                    "Text": "CreatedById",
+                    "Format": "email"
+                  },
+                  {
+                    "Type": "Metadata",
+                    "Text": "Id"
+                  },
+                  {
+                    "Type": "Metadata",
+                    "Text": "LastModified"
+                  },
+                  {
+                    "Type": "Client",
+                    "Text": "Datum"
+                  }
+                ]
               }
             }
           },
@@ -253,7 +221,7 @@
                   "Name": "WorkflowAssignedTo",
                   "Operand": {
                     "DataType": "User",
-                    "Text": "Permissions.Dms.BranchEditor|Branch-18"
+                    "Text": "Editor"
                   }
                 },
                 {

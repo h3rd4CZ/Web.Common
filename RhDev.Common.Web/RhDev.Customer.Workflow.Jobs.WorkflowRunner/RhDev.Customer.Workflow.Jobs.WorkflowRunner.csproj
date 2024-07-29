@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-RhDev.Customer.Workflow.Jobs.WorkflowRunner-d8899010-9fde-4b13-a6b8-0bd1527f5120</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess.Sql\RhDev.Common.Web.Core.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core.DataAccess.Sql\RhDev.Common.Workflow.Core.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core.Impl\RhDev.Common.Workflow.Core.Impl.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core\RhDev.Common.Workflow.Core.csproj" />
+    <ProjectReference Include="..\RhDev.Customer.Component.App\RhDev.Customer.Component.App.csproj" />
+    <ProjectReference Include="..\RhDev.Customer.Component.Core.Impl\RhDev.Customer.Component.Core.Impl.csproj" />
+  </ItemGroup>
+</Project>

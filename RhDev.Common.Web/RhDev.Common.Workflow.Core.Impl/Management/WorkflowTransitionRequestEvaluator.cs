@@ -127,7 +127,7 @@ namespace RhDev.Common.Workflow.Core.Impl.Management
                     requestEntity.Created = centralClockProvider.Now().ExportDateTime;
                     await workflowTransitionRequestRepository.PushRequestAsync(requestEntity);
                 }
-            }
+            }            
         }
 
         public async Task RollbackTransitionAsync(int transitionRequestEntityId)

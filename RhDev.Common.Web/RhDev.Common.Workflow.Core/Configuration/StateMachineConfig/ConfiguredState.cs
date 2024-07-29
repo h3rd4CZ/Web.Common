@@ -11,7 +11,7 @@ namespace RhDev.Common.Workflow.Configuration.StateMachineConfig
     public class ConfiguredState : IWorkflowPartBuilder
     {
         public string Code { get; set; }
-        public WorkflowTaskMail ComletionMail { get; set; }
+        public WorkflowTaskMail CompletionMail { get; set; } = default!;
 
         public List<Transition> Transitions { get; set; } = new List<Transition>();
 

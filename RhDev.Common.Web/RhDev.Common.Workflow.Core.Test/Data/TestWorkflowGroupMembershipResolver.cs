@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Entities.Configuration;
+using RhDev.Common.Web.Core.Utils;
 using RhDev.Common.Workflow.Core.Security;
 using System;
 using System.Collections.Generic;
@@ -11,15 +14,15 @@ namespace RhDev.Common.Workflow.Core.Test.Data
 {
     public class TestWorkflowGroupMembershipResolver : IWorkflowGroupMembershipResolver
     {
+        private readonly WorkflowDatabaseTestContext db;
         private readonly UserManager<IdentityUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
 
         public TestWorkflowGroupMembershipResolver(
-            UserManager<IdentityUser> userManager,  
-            RoleManager<IdentityRole> roleManager)
+            WorkflowDatabaseTestContext db,
+            UserManager<IdentityUser> userManager)
         {
+            this.db = db;
             this.userManager = userManager;
-            this.roleManager = roleManager;
         }
 
         public async Task<ICollection<string>> GetAllGroupsAsync(string userIdentifier)
@@ -28,14 +31,18 @@ namespace RhDev.Common.Workflow.Core.Test.Data
 
             return await userManager.GetRolesAsync(user!);
         }
-
+        
         public async Task<ICollection<string>> ResolveAsync(string groupIdentifier)
         {
-            var role = await roleManager.FindByIdAsync(groupIdentifier);
+            var roleStore = new RoleStore<IdentityRole>(db);
+                        
+            var role = await roleStore.Roles.FirstOrDefaultAsync(r => r.Name == groupIdentifier);
 
-            var roles = await userManager.GetUsersInRoleAsync(role.Name);
+            Guard.NotNull(role);
 
-            return roles.Select(r => r.Id).ToList();
+            var usersInRole = await db.UserRoles.Where(ur => ur.RoleId == role.Id).ToListAsync();
+
+            return usersInRole.Select(ur => ur.UserId).ToList();
         }
     }
 }

@@ -11,6 +11,11 @@
     <ProjectReference Include="..\RhDev.Common.Web.Core.DataAccess\RhDev.Common.Web.Core.DataAccess.csproj" />
     <ProjectReference Include="..\RhDev.Common.Web.Core.Impl\RhDev.Common.Web.Core.Impl.csproj" />
     <ProjectReference Include="..\RhDev.Common.Web.Core\RhDev.Common.Web.Core.csproj" />
+    <ProjectReference Include="..\RhDev.Common.Workflow.Core\RhDev.Common.Workflow.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Config\" />
   </ItemGroup>
 
 </Project>

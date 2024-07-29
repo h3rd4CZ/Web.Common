@@ -24,9 +24,9 @@ namespace RhDev.Common.Web.Core.Impl.Host
     public class ApplicationHostBuilder
     {
         public static IHost CreateMinimalForTest(
-            string[] envVarPrefixes = default!,            
+            string[] envVarPrefixes = default!,
             ITestOutputHelper testOutputHelper = default,
-            IDictionary<Type, Func<IServiceProvider, object>> mocks = default,
+            IDictionary<Type, (Func<IServiceProvider, object>, ServiceLifetime lifetime)> mocks = default,
             bool useSqlServerConfigurationProvider = false,
             bool useDbContextFactory = false,
             Action<HostBuilderContext, IServiceCollection>? serviceConfiguration = default,
@@ -38,7 +38,7 @@ namespace RhDev.Common.Web.Core.Impl.Host
             ITestOutputHelper testOutputHelper = default!,
             bool useSqlServerConfigurationProvider = false,
             bool useDbContextFactory = false,
-            IDictionary<Type, Func<IServiceProvider, object>> mocks = default!,
+            IDictionary<Type, (Func<IServiceProvider, object> f, ServiceLifetime lifetime)> mocks = default!,
             Action<HostBuilderContext, IServiceCollection>? serviceConfiguration = default,
             ContainerRegistrationDefinition[] registrationDefinitions = default!) where TDBContext : DbContext
         {
@@ -47,8 +47,8 @@ namespace RhDev.Common.Web.Core.Impl.Host
                 if (testOutputHelper is not null) logging.AddProvider(new XunitLoggerProvider(testOutputHelper));
 
             }, true, envVarPrefixes: envVarPrefixes, mocks: mocks, registrationDefinitions: registrationDefinitions,
-                useDbContextFactory : useDbContextFactory,
-                registryConfiguration : serviceConfiguration,
+                useDbContextFactory: useDbContextFactory,
+                registryConfiguration: serviceConfiguration,
                 useSqlServerConfigurationProvider: useSqlServerConfigurationProvider);
 
             return builder.Build();
@@ -99,8 +99,8 @@ namespace RhDev.Common.Web.Core.Impl.Host
                 serviceConfiguration,
                 dbUseLazyLoadingProxies: dbUseLazyLoadingProxies,
                 dbSaveChangeInterceptorsTypes: dbSaveChangeInterceptorsTypes,
-                useDbContextFactory : useDbContextFactory,
-                b : commonBuilder,
+                useDbContextFactory: useDbContextFactory,
+                b: commonBuilder,
                 useSqlServerConfigurationProvider: useSqlServerConfigurationProvider);
 
             builder.UseWindowsService(options => options.ServiceName = serviceName);
@@ -116,7 +116,7 @@ namespace RhDev.Common.Web.Core.Impl.Host
             ContainerRegistrationDefinition[] registrationDefinitions = default!,
             string[] envVarPrefixes = default!,
             Action<HostBuilderContext, IServiceCollection>? registryConfiguration = default,
-            IDictionary<Type, Func<IServiceProvider, object>>? mocks = default,
+            IDictionary<Type, (Func<IServiceProvider, object> f, ServiceLifetime lifetime)>? mocks = default,
             bool dbUseLazyLoadingProxies = false,
             bool useSqlServerConfigurationProvider = false,
             bool useDbContextFactory = false,
@@ -186,16 +186,15 @@ namespace RhDev.Common.Web.Core.Impl.Host
 
         }
 
-        private static void ConfigureMocks(ServiceRegistry registry, IDictionary<Type, Func<IServiceProvider, object>> mocks)
+        private static void ConfigureMocks(ServiceRegistry registry, IDictionary<Type, (Func<IServiceProvider, object> f, ServiceLifetime lifetime)> mocks)
         {
             foreach (var mock in mocks)
             {
-                //Lifetime for mock will be always transient
                 var descriptor =
                        new ServiceDescriptor(
                            mock.Key,
-                           mock.Value,
-                           ServiceLifetime.Transient
+                           mock.Value.f,
+                           mock.Value.lifetime
                            );
 
                 registry.Replace(descriptor);

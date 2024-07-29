@@ -15,7 +15,6 @@
 @using RhDev.Customer.Component.App.Data;
 @using RhDev.Customer.Component.App.Data.Notifications;
 @using RhDev.Customer.Component.Core.Impl.Data;
-    using RhDev.Common.Web.Core.DataAccess.SQL.Repository.Stores.Configuration;
 
 @inject ICentralClockProvider CentralClockProvider
 @inject IUserConfigurationProvider UserConfigurationProvider
@@ -29,7 +28,6 @@
 @inject ICorrelationService CorrelationService
 @inject ApplicationDbContext ApplicationDbContext
 @inject IServiceProvider ServiceProvider
-@inject ApplicationDbContext ApplicationDbContext
 @inject IHttpContextAccessor HttpContextAccessor
 @inject ICityDataStore CityDataStore
 @inject ICityDataStore CityDataStoreRepository
@@ -65,10 +63,6 @@
 
     private async Task LoadUserSettings()
     {
-        var user = await dynamicDataStoreRepository.ReadEntityByLambdaAsync<IdentityUser>(typeof(IdentityUser), u => u.Id == "abc");
-
-        return;
-
         var conf = LiveConfigurationProvider.GetConfiguration<CommonConfiguration>();
 
         await ApplicationConfigurationWalker.WalkConfiguration(conf, async (pi, section, key) =>

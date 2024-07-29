@@ -3,7 +3,9 @@ using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using RhDev.Common.Web.Core.Composition;
 using RhDev.Common.Web.Core.Configuration;
+using RhDev.Common.Workflow.Core.Security;
 using RhDev.Customer.Component.Core.Impl.Options;
+using RhDev.Customer.Component.Core.Impl.Workflow;
 using Container = Lamar.Container;
 
 namespace RhDev.Customer.Component.Core.Impl
@@ -21,6 +23,8 @@ namespace RhDev.Customer.Component.Core.Impl
             Configuration
                 .AddOptions<CustomerOptions>()
                 .BindConfiguration(new CustomerOptions().Path);
+
+            For<IWorkflowGroupMembershipResolver>().Use<WorkflowGroupMembershipResolver>();
         }
     }
 }

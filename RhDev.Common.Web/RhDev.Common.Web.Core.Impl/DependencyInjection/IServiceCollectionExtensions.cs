@@ -20,7 +20,7 @@ namespace RhDev.Common.Web.Core.Impl.DependencyInjection
         {
             var builder = ActivateBuilder(b);
                         
-            services.ConfigureDatabase<TDbContext>(hostBuilderContext.Configuration, useDbContextFactory, connStringKey, useLazyLoadingProxies, databaseSaveChangeInterceptorsTypes);
+            services.ConfigureDatabase<TDbContext>(hostBuilderContext.Configuration, useDbContextFactory, connStringKey, useLazyLoadingProxies,databaseSaveChangeInterceptorsTypes);
 
             services.AddCommonOptions();
              

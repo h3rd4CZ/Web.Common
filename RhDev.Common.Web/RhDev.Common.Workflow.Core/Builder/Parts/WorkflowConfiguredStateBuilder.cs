@@ -22,7 +22,7 @@ namespace RhDev.Common.Workflow.Builder.Parts
 
         public WorkflowConfiguredStateBuilder WithCompletionMail(WorkflowOperandBuilder textBuilder, WorkflowOperandBuilder subjectBuilder)
         {
-            product.ComletionMail =
+            product.CompletionMail =
                 new Configuration.StateMachineConfig.Transitions.WorkflowTaskMail
                 {
                     Subject = subjectBuilder is null ? default : new Configuration.StateMachineConfig.Transitions.WorkflowTaskMailSubject { Operand = subjectBuilder.Build() },

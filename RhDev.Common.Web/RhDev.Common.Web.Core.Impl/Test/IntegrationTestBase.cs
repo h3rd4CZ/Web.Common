@@ -56,22 +56,22 @@ namespace RhDev.Common.Web.Core.Test
             return host;
         }
 
-        IDictionary<Type, Func<IServiceProvider, object>> defaultMocks = new Dictionary<Type, Func<IServiceProvider, object>>();
-
-        protected void RegisterMock(Type type, Func<IServiceProvider, object> mock)
+        IDictionary<Type, (Func<IServiceProvider, object>, ServiceLifetime lifetime)> defaultMocks = new Dictionary<Type, (Func<IServiceProvider, object> f, ServiceLifetime lifetime)>();
+        
+        protected void RegisterMock(Type type, Func<IServiceProvider, object> mock, ServiceLifetime lifetime = ServiceLifetime.Scoped)
         {
-            if (!defaultMocks.ContainsKey(type)) defaultMocks.Add(type, mock);
+            if (!defaultMocks.ContainsKey(type)) defaultMocks.Add(type, (mock, lifetime));
         }
 
-        protected void RegisterMock(Type type, object mock)
+        protected void RegisterMock(Type type, object mock, ServiceLifetime lifetime = ServiceLifetime.Scoped)
         {
-            if (!defaultMocks.ContainsKey(type)) defaultMocks.Add(type, p => mock);
+            if (!defaultMocks.ContainsKey(type)) defaultMocks.Add(type, (p => mock, lifetime));
         }
 
         protected void RegisterEfInMemoryMock<TContext>(Action<TContext> seedAction) where TContext : DbContext
             => RegisterEfInMemoryMock<TContext, TContext>(seedAction);
         
-        protected void RegisterEfInMemoryMock<TContext, TSourceContext>(Action<TContext> seedAction, string? databaseName = default) where TContext : DbContext where TSourceContext : DbContext
+        protected void RegisterEfInMemoryMock<TContext, TSourceContext>(Action<TContext> seedAction, string? databaseName = default, ServiceLifetime lifetime = ServiceLifetime.Singleton) where TContext : DbContext where TSourceContext : DbContext
         {
             var options = new DbContextOptionsBuilder<TContext>()
                 .UseInMemoryDatabase(databaseName: databaseName ?? "testdatabase")
@@ -82,10 +82,10 @@ namespace RhDev.Common.Web.Core.Test
             seedAction(dbContext);
 
             ///To use DBContext in common class library
-            RegisterMock(typeof(TSourceContext), dbContext);
+            RegisterMock(typeof(TSourceContext), dbContext, lifetime);
 
             ///To use implemented DBContext in client solution 
-            RegisterMock(typeof(TContext), dbContext);
+            RegisterMock(typeof(TContext), dbContext, lifetime);
         }
 
         private void Init<TDbContext>(
